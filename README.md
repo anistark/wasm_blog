@@ -32,4 +32,3 @@ Using `wasm_bindgen` and `pulldown-cmark` to render markdown on html.
 ```
 
 In this part, the blog supports multiple articles and styling.
-
