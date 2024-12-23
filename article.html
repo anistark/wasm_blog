@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Article</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <a href="index.html">← Back to Home</a>
+    <h1 id="article-title">Loading...</h1>
+    <div id="content">Loading content...</div>
+    <script type="module">
+        import init, { render_markdown } from './pkg/wasm_blog.js';
+
+        async function loadArticle() {
+            await init();
+
+            // Get the blog post filename from the URL query parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const postFilename = urlParams.get('post');
+
+            if (!postFilename) {
+                document.getElementById('article-title').innerText = "Error: No article selected";
+                return;
+            }
+
+            // Fetch the Markdown content
+            const response = await fetch(`./blog/${postFilename}`);
+            const markdown = await response.text();
+
+            // Render the Markdown to HTML
+            const htmlContent = render_markdown(markdown);
+
+            // Update the page
+            document.getElementById('article-title').innerText = postFilename.replace('.md', '').replace(/_/g, ' ');
+            document.getElementById('content').innerHTML = htmlContent;
+        }
+
+        loadArticle();
+    </script>
+</body>
+</html>

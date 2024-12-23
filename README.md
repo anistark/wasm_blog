@@ -11,9 +11,15 @@ Using `wasm_bindgen` and `pulldown-cmark` to render markdown on html.
 ```sh
 .
 ├── Cargo.toml # Rust project configuration
-├── blog
-│   └── post1.md # article post
+├── blog # All Blog Posts
+│   ├── post1.md
+│   ├── post2.md
+│   └── post3.md
 ├── index.html # Home page (entry point)
+├── article.html # Template for individual blog articles
+├── static/ # Static assets like CSS, images, or JavaScript
+│   ├── style.css # Stylesheet for the blog
+│   └── favicon.ico
 ├── target # auto-generated on build
 ├── pkg # auto-generated wasm binding (via `wasm-bindgen`)
 │   ├── wasm_blog.d.ts
@@ -25,6 +31,5 @@ Using `wasm_bindgen` and `pulldown-cmark` to render markdown on html.
     └── main.rs
 ```
 
-In this part, the blog supports single article view.
+In this part, the blog supports multiple articles and styling.
 
-Next in part-2 we'll add multiple articles... 
