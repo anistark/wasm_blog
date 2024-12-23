@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Wasm Blog</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #content { border: 1px solid #ddd; padding: 20px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>My Wasm Blog</h1>
+    <div id="content"></div>
+    <script type="module">
+        import init, { render_markdown } from './pkg/wasm_blog.js';
+
+        async function loadBlog() {
+            await init();
+
+            const response = await fetch('./blog/post1.md');
+            const markdown = await response.text();
+            const htmlContent = render_markdown(markdown);
+
+            document.getElementById('content').innerHTML = htmlContent;
+        }
+
+        loadBlog();
+    </script>
+</body>
+</html>
